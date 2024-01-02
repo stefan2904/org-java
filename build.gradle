@@ -38,12 +38,12 @@ publishing {
             pom {
                 name = 'org-java'
                 description = 'Org files parser and generator'
-                url = 'https://github.com/orgzly/org-java'
+                url = 'https://github.com/stefan2904/org-java'
 
                 scm {
-                    url = "http://github.com/orgzly/org-java"
-                    connection = "scm:git:http://github.com/orgzly/org-java.git"
-                    developerConnection = "scm:git:git@github.com:orgzly/org-java.git"
+                    url = "https://github.com/stefan2904/org-java"
+                    connection = "scm:git:https://github.com/stefan2904/org-java"
+                    developerConnection = "scm:git:git@github.com:stefan2904/org-java.git"
                 }
 
                 licenses {
@@ -59,6 +59,11 @@ publishing {
                         name = 'Neven'
                         email = 'neven@orgzly.com'
                     }
+                    developer {
+                        id = 'stefan'
+                        name = 'Stefan'
+                        email = 'dev@2904.cc'
+                    }
                 }
             }
         }
@@ -66,14 +71,11 @@ publishing {
 
     repositories {
         maven {
-            def releasesRepoUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
-
-            url = isReleaseBuild() ? releasesRepoUrl : snapshotsRepoUrl
-
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/octocat/hello-world"
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
