@@ -420,6 +420,34 @@ public class OrgParserTest extends OrgTestParser {
     }
 
     @Test
+    public void testSeparateHeaderDrawerContent1() throws Exception {
+        OrgParserSettings settings = new OrgParserSettings();
+        settings.separateHeaderAndContentWithNewLine = true;
+        parserWriter = new OrgParserWriter(settings);
+
+        OrgHead head1 = new OrgHead("Title 1");
+        head1.setContent(":SOMEDRAWER:\nfoo\n:END:\n\nContent");
+        OrgNodeInList nodeInList1 = new OrgNodeInList(1, 1, head1);
+
+        String out = parserWriter.whiteSpacedFilePreface("") + parserWriter.whiteSpacedHead(nodeInList1, false);
+        Assert.assertEquals("* Title 1\n:SOMEDRAWER:\nfoo\n:END:\n\nContent\n\n", out);
+    }
+
+    @Test
+    public void testSeparateHeaderDrawerContent2() throws Exception {
+        OrgParserSettings settings = new OrgParserSettings();
+        settings.separateHeaderAndContentWithNewLine = false;
+        parserWriter = new OrgParserWriter(settings);
+
+        OrgHead head1 = new OrgHead("Title 1");
+        head1.setContent(":SOMEDRAWER:\nfoo\n:END:\nContent");
+        OrgNodeInList nodeInList1 = new OrgNodeInList(1, 1, head1);
+
+        String out = parserWriter.whiteSpacedFilePreface("") + parserWriter.whiteSpacedHead(nodeInList1, false);
+        Assert.assertEquals("* Title 1\n:SOMEDRAWER:\nfoo\n:END:\nContent\n\n", out);
+    }
+
+    @Test
     public void testNotSeparateHeaderContentWhitespace() throws Exception {
         OrgParserSettings settings = new OrgParserSettings();
         settings.separateHeaderAndContentWithNewLine = false;
