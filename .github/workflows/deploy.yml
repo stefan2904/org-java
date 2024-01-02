@@ -32,4 +32,4 @@ jobs:
           arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REGISTRY_URL: https://maven.pkg.github.com/${{ GITHUB_REPOSITORY }}
+          REGISTRY_URL: https://maven.pkg.github.com/${{ env.GITHUB_REPOSITORY }}
