@@ -208,7 +208,9 @@ public class OrgParserWriter {
              * Until LOGBOOK and CLOCK support is added.
              */
             String content = head.getContent().trim();
-            if (!content.startsWith(":LOGBOOK:") && !content.startsWith("CLOCK: ") && !isLogNoteHeading(content)) {
+            String firstLine = content.split("\n")[0].trim();
+            if (!content.startsWith(":LOGBOOK:") && !content.startsWith("CLOCK: ")
+                    && !isLogNoteHeading(content) && !lineStartswithDrawer(firstLine)) {
                 if (settings.separateHeaderAndContentWithNewLine) {
                     s.append("\n");
                 }
@@ -258,6 +260,10 @@ public class OrgParserWriter {
             }
         }
         return false;
+    }
+
+    private boolean lineStartswithDrawer(String line) {
+        return line.startsWith(":") && line.endsWith(":");
     }
 
     /** Append (level + 1) spaces. */
