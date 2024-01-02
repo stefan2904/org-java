@@ -31,7 +31,7 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
 
-            groupId = 'com.orgzly'
+            groupId = 'com.orgzlystefan'
             artifactId = 'org-java'
             version = VERSION_NAME
 
